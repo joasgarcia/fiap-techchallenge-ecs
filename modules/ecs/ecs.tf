@@ -106,6 +106,8 @@ resource "aws_ecs_service" "restaurant_service" {
 }
 
 resource "aws_security_group" "service_security_group" {
+  name        = "security-group-ecs-service"
+  description = "Security Group ECS Restaurant Service"
   vpc_id            = data.aws_vpc.restaurant-vpc.id
   ingress {
     from_port       = 0
