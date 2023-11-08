@@ -101,7 +101,7 @@ resource "aws_ecs_service" "restaurant_service" {
   network_configuration {
     subnets          = ["${var.aws_subnets.subnet1}", "${var.aws_subnets.subnet2}", "${var.aws_subnets.subnet3}"]
     assign_public_ip = true
-    security_groups  = ["${module.alb.load_balancer_security_group}"]
+    security_groups  = ["${aws_security_group.service_security_group.id}"]
   }
 }
 
