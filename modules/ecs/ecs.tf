@@ -73,6 +73,14 @@ resource "aws_ecs_task_definition" "restaurant_task" {
           "hostPort": 8080
         }
       ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "restaurantLogGroup",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
       "memory": 512,
       "cpu": 256
     }
