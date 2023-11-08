@@ -91,6 +91,7 @@ resource "aws_ecs_service" "restaurant_service" {
   task_definition = aws_ecs_task_definition.restaurant_task.arn
   launch_type     = "FARGATE"
   desired_count   = 1
+  health_check_grace_period_seconds = 300
 
   load_balancer {
     target_group_arn = module.alb.alb_target_group_arn
