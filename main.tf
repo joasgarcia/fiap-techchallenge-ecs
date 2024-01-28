@@ -21,26 +21,5 @@ module "ecs" {
     subnet3 = module.network.aws_subnets.subnet3
   }
 
-  app_environments_vars = [
-    {
-      "name"  = "DB_URL",
-      "value" = var.order_service_settings.jdbc_url
-    },
-    {
-      "name"  = "DB_USERNAME",
-      "value" = "username"
-    },
-    {
-      "name"  = "DB_PASSWORD",
-      "value" = "password"
-    },
-    {
-      "name"  = "PAYMENT_BASE_URL",
-      "value" = "https://www.google.com/"
-    },
-    {
-      "name"  = "PRODUCTION_BASE_URL",
-      "value" = "https://www.google.com/"
-    },
-  ]
+  app_environments_vars = var.order_service_settings.env_vars
 }
