@@ -1,6 +1,8 @@
 module "alb" {
   source = "../alb"
 
+  vpc_id = var.vpc_id
+
   aws_subnets = {
     subnet1 = var.aws_subnets.subnet1
     subnet2 = var.aws_subnets.subnet2
@@ -123,7 +125,7 @@ resource "aws_ecs_service" "restaurant_service" {
 resource "aws_security_group" "service_security_group" {
   name        = "security-group-ecs-service"
   description = "Security Group ECS Restaurant Service"
-  vpc_id            = data.aws_vpc.restaurant-vpc.id
+  vpc_id            = var.vpc_id
   ingress {
     from_port       = 0
     to_port         = 0

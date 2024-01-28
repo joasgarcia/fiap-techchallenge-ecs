@@ -5,3 +5,7 @@ variable "aws_subnets" {
     subnet3 = string
   })
 }
+
+variable "vpc_id" {
+  type = string
+}
