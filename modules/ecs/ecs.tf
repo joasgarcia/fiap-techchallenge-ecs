@@ -2,6 +2,7 @@ module "alb" {
   source = "../alb"
 
   vpc_id = var.vpc_id
+  artifacts_prefix = var.artifacts_prefix
 
   aws_subnets = {
     subnet1 = var.aws_subnets.subnet1
@@ -57,21 +58,21 @@ module "alb" {
 #}
 
 resource "aws_cloudwatch_log_group" "restaurant_order_logs" {
-  name              = "/ecs/restaurant-order-logs"
+  name              = "/ecs/${var.artifacts_prefix}-logs"
   retention_in_days = 7
 }
 
 
 resource "aws_ecs_cluster" "restaurant_cluster" {
-  name = "restaurant-cluster"
+  name = "${var.artifacts_prefix}-cluster"
 }
 
 resource "aws_ecs_task_definition" "restaurant_task" {
-  family                   = "restaurant-task"
+  family                   = "${var.artifacts_prefix}-task-family"
   container_definitions    = <<DEFINITION
   [
     {
-      "name": "restaurant-task",
+      "name": "${var.artifacts_prefix}-task",
       "image": "${var.aws_account_id}.dkr.ecr.${var.aws_account_region}.amazonaws.com/${var.ecr_repository_name}:latest",
       "essential": true,
       "environment": ${jsonencode(var.app_environments_vars)},
@@ -102,7 +103,7 @@ resource "aws_ecs_task_definition" "restaurant_task" {
 }
 
 resource "aws_ecs_service" "restaurant_service" {
-  name            = "restaurant-service"
+  name            = "${var.artifacts_prefix}-ecs-service"
   cluster         = aws_ecs_cluster.restaurant_cluster.id
   task_definition = aws_ecs_task_definition.restaurant_task.arn
   launch_type     = "FARGATE"
@@ -123,8 +124,8 @@ resource "aws_ecs_service" "restaurant_service" {
 }
 
 resource "aws_security_group" "service_security_group" {
-  name        = "security-group-ecs-service"
-  description = "Security Group ECS Restaurant Service"
+  name        = "${var.artifacts_prefix}-security-group-ecs-service"
+  description = "Security Group ECS ${var.artifacts_prefix} Service"
   vpc_id            = var.vpc_id
   ingress {
     from_port       = 0

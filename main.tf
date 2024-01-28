@@ -12,6 +12,7 @@ module "ecr_order_service" {
 module "ecs" {
   source = "./modules/ecs"
 
+  artifacts_prefix = var.order_service_settings.artifact_prefix
   vpc_id = var.vpc_id
   ecs_task_execution_role_arn = var.ecs_task_execution_role_arn
 
