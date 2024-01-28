@@ -1,5 +1,7 @@
 module "network" {
   source = "./modules/network"
+
+  vpc_id = var.vpc_id
 }
 
 module "ecr_order_service" {
@@ -9,6 +11,8 @@ module "ecr_order_service" {
 
 module "ecs" {
   source = "./modules/ecs"
+
+  vpc_id = var.vpc_id
 
   aws_account_id = var.aws_account_id
   aws_account_region = var.aws_account_region

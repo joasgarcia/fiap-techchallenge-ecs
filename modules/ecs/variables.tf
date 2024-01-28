@@ -22,3 +22,8 @@ variable "aws_account_region" {
 variable "ecr_repository_name" {
   type = string
 }
+
+variable "vpc_id" {
+  type = string
+}
+

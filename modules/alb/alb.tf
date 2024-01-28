@@ -12,7 +12,7 @@ resource "aws_alb" "restaurant_alb" {
 resource "aws_security_group" "load_balancer_security_group" {
   name        = "security_group_lb"
   description = "Security Group LB"
-  vpc_id            = data.aws_vpc.restaurant-vpc.id
+  vpc_id            = var.vpc_id
   ingress {
     from_port   = 80
     to_port     = 80
@@ -33,7 +33,7 @@ resource "aws_lb_target_group" "target_group" {
   port        = 8080
   protocol    = "HTTP"
   target_type = "ip"
-  vpc_id      = data.aws_vpc.restaurant-vpc.id
+  vpc_id      = var.vpc_id
 }
 
 resource "aws_lb_listener" "listener" {
