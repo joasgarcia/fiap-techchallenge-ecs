@@ -1,8 +1,8 @@
 variable "order_service_settings" {
   type = object({
-    jdbc_url = string
     ecr_repository_name = string
     artifact_prefix = string
+    env_vars = list(map(string))
   })
 }
 
