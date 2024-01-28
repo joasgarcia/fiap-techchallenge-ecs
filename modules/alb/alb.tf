@@ -1,7 +1,6 @@
 resource "aws_alb" "restaurant_alb" {
   name               = "restaurant-alb"
   load_balancer_type = "application"
-  internal = true
   subnets = [
     "${var.aws_subnets.subnet1}",
     "${var.aws_subnets.subnet2}",
