@@ -54,6 +54,11 @@ module "alb" {
 #  policy_arn = aws_iam_policy.ecs_task_execution.arn
 #}
 
+resource "aws_cloudwatch_log_group" "restaurant_order_logs" {
+  name              = "/ecs/restaurant-order-logs"
+  retention_in_days = 7
+}
+
 
 resource "aws_ecs_cluster" "restaurant_cluster" {
   name = "restaurant-cluster"
@@ -77,7 +82,7 @@ resource "aws_ecs_task_definition" "restaurant_task" {
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "restaurantLogGroup",
+          "awslogs-group": "${aws_cloudwatch_log_group.restaurant_order_logs.name}",
           "awslogs-region": "us-east-1",
           "awslogs-stream-prefix": "ecs"
         }
