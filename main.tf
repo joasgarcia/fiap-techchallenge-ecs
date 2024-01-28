@@ -13,6 +13,7 @@ module "ecs" {
   source = "./modules/ecs"
 
   vpc_id = var.vpc_id
+  ecs_task_execution_role_arn = var.ecs_task_execution_role_arn
 
   aws_account_id = var.aws_account_id
   aws_account_region = var.aws_account_region

@@ -27,3 +27,8 @@ variable "vpc_id" {
   type = string
 }
 
+variable "ecs_task_execution_role_arn" {
+  description = "ARN da role para executar o ECS task"
+  type = string
+}
+

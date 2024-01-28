@@ -28,3 +28,4 @@ order_service_settings = {
 aws_account_id = "372103585771"
 aws_account_region = "us-east-1"
 vpc_id = "vpc-03df0ff4f1685cf1a"
+ecs_task_execution_role_arn = "arn:aws:iam::372103585771:role/LabRole"

@@ -98,7 +98,7 @@ resource "aws_ecs_task_definition" "restaurant_task" {
   network_mode             = "awsvpc"
   memory                   = 512
   cpu                      = 256
-  execution_role_arn       = "arn:aws:iam::372103585771:role/LabRole" #aws_iam_role.ecs_task_execution_role.arn
+  execution_role_arn       = var.ecs_task_execution_role_arn #aws_iam_role.ecs_task_execution_role.arn
 }
 
 resource "aws_ecs_service" "restaurant_service" {
