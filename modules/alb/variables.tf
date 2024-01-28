@@ -9,3 +9,7 @@ variable "aws_subnets" {
 variable "vpc_id" {
   type = string
 }
+
+variable "artifacts_prefix" {
+  type = string
+}

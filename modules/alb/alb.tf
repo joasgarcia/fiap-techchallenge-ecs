@@ -1,5 +1,5 @@
 resource "aws_alb" "restaurant_alb" {
-  name               = "restaurant-alb"
+  name               = "${var.artifacts_prefix}-alb"
   load_balancer_type = "application"
   subnets = [
     "${var.aws_subnets.subnet1}",
@@ -10,8 +10,8 @@ resource "aws_alb" "restaurant_alb" {
 }
 
 resource "aws_security_group" "load_balancer_security_group" {
-  name        = "security_group_lb"
-  description = "Security Group LB"
+  name        = "${var.artifacts_prefix}-security_group_lb"
+  description = "${var.artifacts_prefix} Security Group LB"
   vpc_id            = var.vpc_id
   ingress {
     from_port   = 80
@@ -29,7 +29,7 @@ resource "aws_security_group" "load_balancer_security_group" {
 }
 
 resource "aws_lb_target_group" "target_group" {
-  name        = "restaurant-target-group"
+  name        = "${var.artifacts_prefix}-target-group"
   port        = 8080
   protocol    = "HTTP"
   target_type = "ip"
