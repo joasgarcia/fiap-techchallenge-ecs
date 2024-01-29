@@ -1,3 +1,7 @@
+locals {
+  container_name = "${var.artifacts_prefix}-task"
+}
+
 module "alb" {
   source = "../alb"
 
@@ -72,7 +76,7 @@ resource "aws_ecs_task_definition" "restaurant_task" {
   container_definitions    = <<DEFINITION
   [
     {
-      "name": "${var.artifacts_prefix}-task",
+      "name": "${local.container_name}",
       "image": "${var.aws_account_id}.dkr.ecr.${var.aws_account_region}.amazonaws.com/${var.ecr_repository_name}:latest",
       "essential": true,
       "environment": ${jsonencode(var.app_environments_vars)},
@@ -112,7 +116,7 @@ resource "aws_ecs_service" "restaurant_service" {
 
   load_balancer {
     target_group_arn = module.alb.alb_target_group_arn
-    container_name   = aws_ecs_task_definition.restaurant_task.family
+    container_name   = "${local.container_name}"
     container_port   = 8080
   }
 
