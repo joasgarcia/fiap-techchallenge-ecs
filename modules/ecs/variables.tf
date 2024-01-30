@@ -9,6 +9,7 @@ variable "aws_subnets" {
 variable "app_environments_vars" {
   type        = list(map(string))
   description = "environment variable needed by the application"
+  nullable = true
 }
 
 variable "aws_account_id" {

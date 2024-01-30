@@ -6,6 +6,13 @@ variable "order_service_settings" {
   })
 }
 
+variable "payment_service_settings" {
+  type = object({
+    ecr_repository_name = string
+    artifact_prefix = string
+  })
+}
+
 variable "aws_account_id" {
   description = "AWS Account ID"
   type = string
