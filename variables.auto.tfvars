@@ -30,6 +30,25 @@ payment_service_settings = {
   artifact_prefix = "payment-service"
 }
 
+production_service_settings = {
+  ecr_repository_name = "restaurant-app/producao"
+  artifact_prefix = "production-service"
+  env_vars = [
+    {
+      "name"  = "DB_URL",
+      "value" = "jdbc:mysql://fiap-techchallenge-db.c76skywwetbx.us-east-1.rds.amazonaws.com/fiaptechchallenge"
+    },
+    {
+      "name"  = "DB_USERNAME",
+      "value" = "username"
+    },
+    {
+      "name"  = "DB_PASSWORD",
+      "value" = "password"
+    }
+  ]
+}
+
 aws_account_id = "372103585771"
 aws_account_region = "us-east-1"
 vpc_id = "vpc-03df0ff4f1685cf1a"
