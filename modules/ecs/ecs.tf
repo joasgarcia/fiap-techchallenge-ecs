@@ -104,6 +104,7 @@ resource "aws_ecs_task_definition" "restaurant_task" {
   memory                   = 512
   cpu                      = 256
   execution_role_arn       = var.ecs_task_execution_role_arn #aws_iam_role.ecs_task_execution_role.arn
+  task_role_arn            = var.ecs_task_execution_role_arn
 }
 
 resource "aws_ecs_service" "restaurant_service" {
