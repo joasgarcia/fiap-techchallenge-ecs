@@ -9,8 +9,8 @@ terraform {
 
 provider "aws" {
   region = "us-east-1"
-  access_key = "<SEU ACCESS KEY>"
-  secret_key = "<SEU SECRET KEY>"
+  profile = "lab"
+  shared_credentials_files = ["$HOME/.aws/credentials"]
 
   default_tags {
     tags = {
